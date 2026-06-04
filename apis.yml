@@ -1,0 +1,59 @@
+---
+aid: tianjin
+name: Tianjin University
+description: >-
+  Tianjin University (TJU) is a national public research university in Tianjin,
+  China, founded in 1895 as Peiyang University and recognized as the oldest
+  modern university in China. It is ranked #269 in the QS World University
+  Rankings 2025. TJU operates the usual institutional web properties (official
+  site, library OPAC, faculty and international-cooperation portals) but does
+  not publish a public developer portal or documented, openly accessible API.
+  No public API documentation, base URLs, or sign-up flows could be verified at
+  the time of cataloging; the entries below reflect only confirmed public web
+  properties, not documented APIs.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/tianjin/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - China
+  - Tianjin
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: tianjin:opac
+    name: Tianjin University Library OPAC
+    description: >-
+      Public online catalog (OPAC) for Tianjin University Library. The catalog
+      is browsable over the web, but no documented, openly accessible search or
+      discovery API (e.g. Primo/Alma REST, SRU, or OAI-PMH) was confirmed at the
+      time of cataloging.
+    humanURL: https://opac.lib.tju.edu.cn
+    tags: [ Library, Catalog, OPAC, Search ]
+    properties:
+      - type: Documentation
+        url: https://opac.lib.tju.edu.cn
+common:
+  - type: Website
+    url: https://en.tju.edu.cn/
+  - type: GitHub
+    url: https://github.com/TJUBlockchainLab
+  - type: LinkedIn
+    url: https://cn.linkedin.com/school/tianjinuniversity/
+  - type: Plans
+    url: plans/tianjin-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/tianjin-rate-limits.yml
+  - type: FinOps
+    url: finops/tianjin-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
