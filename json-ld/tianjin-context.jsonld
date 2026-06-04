@@ -1,0 +1,47 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "tju": "https://en.tju.edu.cn/#vocab/",
+    "name": "schema:name",
+    "alternateName": "schema:alternateName",
+    "description": "schema:description",
+    "url": "schema:url",
+    "foundingDate": "schema:foundingDate",
+    "location": "schema:location",
+    "sameAs": "schema:sameAs",
+    "department": "schema:department",
+    "library": {
+      "@id": "tju:library",
+      "@type": "schema:Library"
+    },
+    "catalog": {
+      "@id": "tju:catalog",
+      "@type": "schema:DataCatalog"
+    },
+    "opac": {
+      "@id": "tju:opac",
+      "@type": "schema:WebSite"
+    }
+  },
+  "@type": "schema:CollegeOrUniversity",
+  "@id": "https://en.tju.edu.cn/",
+  "name": "Tianjin University",
+  "alternateName": "TJU",
+  "description": "Tianjin University (TJU) is a national public research university in Tianjin, China, founded in 1895 as Peiyang University and recognized as the oldest modern university in China.",
+  "url": "https://en.tju.edu.cn/",
+  "foundingDate": "1895",
+  "location": "Tianjin, China",
+  "sameAs": [
+    "https://github.com/TJUBlockchainLab",
+    "https://cn.linkedin.com/school/tianjinuniversity/"
+  ],
+  "library": {
+    "@type": "schema:Library",
+    "name": "Tianjin University Library",
+    "opac": {
+      "@type": "schema:WebSite",
+      "name": "Tianjin University Library OPAC",
+      "url": "https://opac.lib.tju.edu.cn"
+    }
+  }
+}
