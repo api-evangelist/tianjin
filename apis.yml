@@ -40,6 +40,8 @@ apis:
       - type: Documentation
         url: https://opac.lib.tju.edu.cn
 common:
+  - type: DomainSecurity
+    url: security/tianjin-domain-security.yml
   - type: Website
     url: https://en.tju.edu.cn/
   - type: GitHub
