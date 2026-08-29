@@ -38,6 +38,9 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tianjin.png
 url: https://raw.githubusercontent.com/api-evangelist/tianjin/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "No public API documentation, base URLs, or sign-up flows could be verified at the time of cataloging; the entries below reflect only confirmed public web properties, not documented APIs."
 tags:
   - Education
   - Higher Education
