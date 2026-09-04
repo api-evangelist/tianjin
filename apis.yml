@@ -1,15 +1,23 @@
 aid: tianjin
 name: Tianjin University
 description: >-
-  Tianjin University (TJU) is a national public research university in Tianjin,
-  China, founded in 1895 as Peiyang University and recognized as the oldest
-  modern university in China. It is ranked #269 in the QS World University
-  Rankings 2025. TJU operates the usual institutional web properties (official
-  site, library OPAC, faculty and international-cooperation portals) but does
-  not publish a public developer portal or documented, openly accessible API.
-  No public API documentation, base URLs, or sign-up flows could be verified at
-  the time of cataloging; the entries below reflect only confirmed public web
-  properties, not documented APIs.
+  Tianjin University (天津大学, TJU) is a national public research university in Tianjin, China,
+  founded in 1895 as Peiyang University and recognised as the oldest modern university in the
+  country. It publishes no public API, no developer portal, no open data portal and no
+  specification of any kind: www.tju.edu.cn returns 404 for robots.txt, llms.txt,
+  .well-known/security.txt and .well-known/openid-configuration, and api., data., open.,
+  developer. and dev.tju.edu.cn do not resolve. What it does operate — and this is the finding
+  that separates it from most of this cohort — is its own Shibboleth SAML 2.0 identity provider at
+  idp.tju.edu.cn, on the university's own CERNET address with no vendor CNAME, registered as
+  entity 671640 in CARSI, China's national research-and-education identity federation, and visible
+  in eduGAIN since October 2019. Its metadata document is credential-free, machine-readable and
+  genuinely the institution's own engineering rather than a vendor's contract running under the
+  university's name. Beyond that the estate is a set of relationships and gated systems: a
+  Crossref membership with its own DOI prefix but only eleven registered DOIs, a ROR
+  registration, a library discovery front end that answers only an SPA shell, and an institutional
+  repository, OPAC and campus portal that resolve into TJU's own address block but redirect every
+  off-campus request to a soft-403 network notice. There is no DataCite membership and no
+  reachable OAI-PMH endpoint.
 type: Index
 deliveryModel:
   model: saas
@@ -34,13 +42,19 @@ accessModel:
     - plans
   generated: '2026-07-22'
   method: derived
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tianjin.png
 url: https://raw.githubusercontent.com/api-evangelist/tianjin/refs/heads/main/apis.yml
+x-type: university
+x-category: Public Research University
 x-api-posture: no-product-api
 x-api-posture-basis: observed
-x-api-posture-note: "No public API documentation, base URLs, or sign-up flows could be verified at the time of cataloging; the entries below reflect only confirmed public web properties, not documented APIs."
+x-api-posture-note: >-
+  No public API documentation, base URL, key issuance or sign-up flow exists on any tju.edu.cn
+  host. The one credential-free machine-readable document the university serves is SAML 2.0
+  federation metadata for its own identity provider — institutional infrastructure, not a product
+  API, and it is recorded as such.
 tags:
   - Education
   - Higher Education
@@ -48,19 +62,222 @@ tags:
   - Research
   - China
   - Tianjin
+  - Double First Class
+  - Project 985
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - Single Sign-On
+  - Library
+  - Research Repository
+  - Persistent Identifiers
 created: '2026-06-03'
-modified: '2026-07-25'
+modified: '2026-09-01'
 specificationVersion: '0.23'
-apis: []
+apis:
+  - aid: tianjin:shibboleth-idp
+    name: Tianjin University Shibboleth Identity Provider (SAML 2.0 metadata)
+    description: >-
+      The university's own Shibboleth identity provider, and the only credential-free,
+      machine-readable contract anywhere in this profile. https://idp.tju.edu.cn/idp/shibboleth
+      returns HTTP 200 and 14,410 bytes of SAML 2.0 metadata describing an IDPSSODescriptor and an
+      AttributeAuthorityDescriptor, twelve X.509 certificates, and single sign-on, single logout,
+      attribute query and artifact resolution endpoints across the Redirect, POST, POST-SimpleSign
+      and SOAP bindings, plus the Shibboleth-specific urn:mace:shibboleth:1.0 AuthnRequest profile
+      and shibmd:Scope extensions scoped to idp.tju.edu.cn. The deployment's own error pages are
+      branded 天津大学CARSI Idp. Two honest caveats: the served document still carries Shibboleth's
+      installer boilerplate ("This is example metadata only", mdui:DisplayName "A Name for the IdP
+      at idp.tju.edu.cn"), which is a hygiene observation and not a reason to doubt the entity; and
+      there is no OpenID Connect surface alongside it — /.well-known/openid-configuration and
+      /idp/profile/oidc/keyset both return 404.
+    humanURL: https://idp.tju.edu.cn/idp/
+    baseURL: https://idp.tju.edu.cn/idp/
+    tags:
+      - Identity Federation
+      - Shibboleth
+      - SAML
+      - Single Sign-On
+      - Authentication
+      - Education
+    properties:
+      - type: IdentityFederation
+        url: identity-federation/tianjin-identity-federation.yml
+      - type: Metadata
+        url: identity-federation/tianjin-idp-saml-metadata.xml
+      - type: Authentication
+        url: authentication/tianjin-authentication.yml
+      - type: Conformance
+        url: conformance/tianjin-conformance.yml
+    x-operator: institution
+    x-operator-basis: >-
+      idp.tju.edu.cn resolves to 202.113.2.198 — the same address as www.tju.edu.cn and
+      en.tju.edu.cn — inside CERNET's BJR-CERNET allocation, with no CNAME to any vendor. Every
+      endpoint in the metadata, including the :8443 back-channel services, is on that host.
+      Shibboleth is open-source software the institution deploys itself, not a hosted platform, so
+      there is no vendor tenancy here: the contract, the keys and the endpoints are Tianjin
+      University's own.
+  - aid: tianjin:carsi-edugain
+    name: CARSI / eduGAIN Federation Registration (entity 671640)
+    description: >-
+      The same identity provider seen from the federation side. Tianjin University's IdP is
+      registered in CARSI — the CERNET Authentication and Resource Sharing Infrastructure,
+      registration authority https://www.carsi.edu.cn, an eduGAIN member federation since May 2019
+      and in production since June 2019 — as eduGAIN entity 671640, first seen 2019-10-31, scope
+      idp.tju.edu.cn, with both IDPSSODescriptor and AttributeAuthorityDescriptor roles and display
+      names "Tianjin University" / 天津大学(Tianjin University). This is what makes the IdP usable
+      for federated access to licensed library and publisher resources. Disambiguated against two
+      same-city lookalikes registered in the same federation: idp.tjufe.edu.cn is Tianjin
+      University of Finance and Economics and idp.tjut.edu.cn is Tianjin University of Technology;
+      neither is recorded here.
+    humanURL: https://www.carsi.edu.cn/
+    baseURL: https://technical.edugain.org/api.php?action=list_entities&format=json&fed_id=CARSI
+    tags:
+      - Identity Federation
+      - eduGAIN
+      - CARSI
+      - SAML
+      - Registry
+    properties:
+      - type: IdentityFederation
+        url: identity-federation/tianjin-identity-federation.yml
+      - type: Registry
+        url: https://technical.edugain.org/api.php?action=list_entities&format=json&fed_id=CARSI
+      - type: Conformance
+        url: conformance/tianjin-conformance.yml
+    x-operator: federation
+    x-operator-basis: >-
+      An identity federation is shared by definition — 725 entities are registered in CARSI — and
+      the entry within it carries Tianjin University's own IdP, scope, display names and roles.
+      CERNET/CARSI operates the registry; the identity behind entity 671640 is the institution's.
+      Per the university pipeline contract, the federation's own specification is not saved here
+      and the relationship is not deleted for being shared.
+  - aid: tianjin:crossref
+    name: Crossref Membership (member 34483, prefix 10.55582)
+    description: >-
+      Tianjin University is a Crossref member in its own right — member id 34483, DOI prefix
+      10.55582 — and is also present in the Crossref Open Funder Registry under funder ids
+      501100004517 and 501100015644. The scale is worth stating plainly rather than rounding up:
+      the member record reports 11 total DOIs, all backfile, none current. TJU registers no DOIs
+      with DataCite; a query of both the DataCite providers and clients endpoints returns
+      meta.total = 0.
+    humanURL: https://www.crossref.org/
+    baseURL: https://api.crossref.org/members/34483
+    tags:
+      - DOI
+      - Persistent Identifiers
+      - Scholarly Publishing
+      - Registry
+    properties:
+      - type: Registry
+        url: https://api.crossref.org/members/34483
+      - type: Conformance
+        url: conformance/tianjin-conformance.yml
+    x-operator: registry
+    x-operator-basis: >-
+      An identifier registry the institution is registered in. api.crossref.org is shared because
+      DOI registration is shared; member record 34483 and prefix 10.55582 name Tianjin University
+      specifically. The registry's contract is Crossref's and is not saved here; the membership is
+      a fact about the institution and is not deleted.
+  - aid: tianjin:ror
+    name: ROR Registration (https://ror.org/012tb2g32)
+    description: >-
+      Tianjin University's Research Organization Registry record — the canonical machine-readable
+      identifier for the institution as an entity, and the join key the other registries in this
+      profile resolve against. It carries the English and Chinese names, the alias Peiyang
+      University, the acronym TJU, the domain tju.edu.cn, established 1895, GRID grid.33763.32,
+      ISNI 0000 0004 1761 2484, Wikidata Q2031560, Crossref Funder ids 501100004517 and
+      501100015644, and four child organisations (three State Key Laboratories and the
+      Collaborative Innovation Center of Chemical Science and Engineering Tianjin).
+    humanURL: https://ror.org/012tb2g32
+    baseURL: https://api.ror.org/v2/organizations/012tb2g32
+    tags:
+      - Persistent Identifiers
+      - Organization Identifiers
+      - Registry
+    properties:
+      - type: Registry
+        url: https://api.ror.org/v2/organizations/012tb2g32
+    x-operator: registry
+    x-operator-basis: >-
+      An organisation registry the institution is registered in. ROR operates the API; the record
+      describes Tianjin University.
+  - aid: tianjin:library-discovery
+    name: TJU Library Unified Discovery (统一检索)
+    description: >-
+      The library's unified discovery front end at find.lib.tju.edu.cn, reachable from outside the
+      campus network and serving a real single-page application titled 统一检索. It publishes no
+      machine-readable contract: /api/, /api/search and /search all return HTTP 200 with the same
+      1,129-byte SPA shell rather than JSON, so there is nothing here that can be promoted to a
+      contract. Recorded as an institution-operated surface with no institution-published
+      interface. The library's main site is a separate host, home.lib.tju.edu.cn.
+    humanURL: https://find.lib.tju.edu.cn/
+    tags:
+      - Library
+      - Discovery
+      - Catalog
+      - Education
+    properties:
+      - type: LibraryCatalog
+        url: https://find.lib.tju.edu.cn/
+      - type: Website
+        url: https://home.lib.tju.edu.cn/
+    x-operator: institution
+    x-operator-basis: >-
+      find.lib.tju.edu.cn and home.lib.tju.edu.cn both resolve to 202.113.2.196, in the
+      university's own CERNET block, with no CNAME to any discovery vendor and no vendor name,
+      contact or account identifier exposed in the served HTML. The underlying discovery software
+      may well be a purchased product, but nothing published states so, and there is no contract to
+      attribute either way — so this is recorded as an institution-operated surface, not as a
+      tenancy we cannot evidence.
+  - aid: tianjin:campus-gated-systems
+    name: Campus-Network-Gated Systems (repository, OPAC, portal)
+    description: >-
+      Three university systems resolve into TJU's own address block but are unreachable from
+      outside the campus network: the institutional repository ir.lib.tju.edu.cn and the library
+      OPAC opac.lib.tju.edu.cn (both 202.113.2.196) and the campus portal portal.tju.edu.cn
+      (202.113.2.198). Every off-campus request to any of them is transparently redirected to
+      http://network-notice.tju.edu.cn/, which serves a page titled "403" under HTTP status 200 —
+      a soft-403 access control, not an outage. Four standard OAI-PMH paths were probed against
+      the repository and all four hit the same gate. This is recorded as an institution-operated
+      surface whose contract, if one exists, cannot be read from here; the previous profile's
+      ProductPage pointer at opac.lib.tju.edu.cn has been removed because it grades as a live 200
+      while returning a 403 notice.
+    humanURL: https://home.lib.tju.edu.cn/
+    tags:
+      - Research Repository
+      - Institutional Repository
+      - Library
+      - Restricted
+      - Education
+    properties:
+      - type: Website
+        url: https://home.lib.tju.edu.cn/
+      - type: Authentication
+        url: authentication/tianjin-authentication.yml
+    x-operator: institution
+    x-operator-basis: >-
+      All three hosts sit in Tianjin University's own 202.113.2.0/24 CERNET allocation with no
+      CNAME, and the interceptor itself, network-notice.tju.edu.cn, is a university host. The gate
+      is the institution's own network policy.
 common:
-  - type: DomainSecurity
-    url: security/tianjin-domain-security.yml
   - type: Website
     url: https://en.tju.edu.cn/
+  - type: IdentityFederation
+    url: identity-federation/tianjin-identity-federation.yml
+  - type: Authentication
+    url: authentication/tianjin-authentication.yml
+  - type: Conformance
+    url: conformance/tianjin-conformance.yml
+  - type: LibraryCatalog
+    url: https://find.lib.tju.edu.cn/
+  - type: Blog
+    url: https://news.tju.edu.cn/
   - type: GitHub
     url: https://github.com/TJUBlockchainLab
   - type: LinkedIn
     url: https://cn.linkedin.com/school/tianjinuniversity/
+  - type: DomainSecurity
+    url: security/tianjin-domain-security.yml
   - type: Plans
     url: plans/tianjin-plans-pricing.yml
   - type: RateLimits
@@ -69,8 +286,132 @@ common:
     url: finops/tianjin-finops.yml
   - type: Review
     url: review.yml
-  - type: ProductPage
-    url: https://opac.lib.tju.edu.cn
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    One genuinely institution-operated, machine-readable surface was found, probed and recorded:
+    Tianjin University's own Shibboleth SAML 2.0 identity provider at idp.tju.edu.cn, serving
+    14,410 bytes of credential-free metadata over HTTP 200, registered as eduGAIN entity 671640 in
+    the CARSI federation since October 2019. That is the class this pipeline exists to find and it
+    is the class the June 2026 cohort was most completely missing. It is institution-operated by
+    every available signal — 202.113.2.198 in CERNET's BJR-CERNET block, the same address as the
+    university's own web hosts, no CNAME, Shibboleth-specific protocol extensions, and the
+    deployment's own 天津大学CARSI Idp branding.
+
+    Three relationships are recorded rather than contracts: the CARSI/eduGAIN registration
+    (federation), a Crossref membership with prefix 10.55582 (registry), and the ROR registration
+    012tb2g32 (registry). None of their specifications is saved here and none of the relationships
+    was deleted. The Crossref footprint is small and is stated as such — 11 DOIs, all backfile.
+
+    What genuinely does not exist: no developer portal, no open data portal, no OpenAPI or any
+    other specification published by the university, no OAuth or OIDC authorization server, no
+    self-service registration, no published rate limits, no DataCite membership (providers and
+    clients both return meta.total = 0), and no OpenID Connect alongside the SAML IdP. api.,
+    data., open., developer., dev., hpc. and scc.tju.edu.cn do not resolve at all.
+
+    What exists but cannot be read from outside China's campus network: the institutional
+    repository ir.lib.tju.edu.cn, the OPAC opac.lib.tju.edu.cn and the portal portal.tju.edu.cn,
+    all of which resolve into TJU's own address block and are transparently redirected to
+    network-notice.tju.edu.cn, which serves a page titled "403" under HTTP 200. Four OAI-PMH paths
+    were probed against the repository and all four hit that gate, so oai-pmh is recorded as not
+    found from our vantage point rather than as absent. The library's reachable discovery front end
+    at find.lib.tju.edu.cn answers every path with the same SPA shell and publishes no contract.
+
+    Two corrections were made to the previous profile. The ProductPage pointer at
+    opac.lib.tju.edu.cn was removed: it grades as a live HTTP 200 while actually returning the
+    network gate's 403 notice. And a Chinese-language AI-governance document the graduate school
+    issued — 《关于规范研究生学位论文与实践成果使用人工智能工具的倡议书》 — was located in search
+    results but its published URL (gs.tju.edu.cn/info/1023/4816.htm) returns HTTP 404 over both
+    HTTP and HTTPS while sibling pages on the same host return 200, so no AIPolicy pointer was
+    emitted rather than emitting a dead one. Searches were run in Chinese as well as English.
+  assessed: '2026-09-01'
+  method: probed
+  evidence:
+    - url: https://idp.tju.edu.cn/idp/shibboleth
+      status: 200
+    - url: https://idp.tju.edu.cn/
+      status: 200
+    - url: https://idp.tju.edu.cn/idp/profile/SAML2/Redirect/SSO
+      status: 400
+    - url: https://idp.tju.edu.cn/idp/status
+      status: 403
+    - url: https://technical.edugain.org/api.php?action=list_entities&format=json&fed_id=CARSI
+      status: 200
+    - url: https://technical.edugain.org/api.php?action=list_feds
+      status: 200
+    - url: https://www.carsi.edu.cn/
+      status: 200
+    - url: https://api.crossref.org/members/34483
+      status: 200
+    - url: https://api.crossref.org/members?query=Tianjin+University
+      status: 200
+    - url: https://api.ror.org/v2/organizations/012tb2g32
+      status: 200
+    - url: https://ror.org/012tb2g32
+      status: 200
+    - url: https://en.tju.edu.cn/
+      status: 200
+    - url: https://www.tju.edu.cn/
+      status: 200
+    - url: https://home.lib.tju.edu.cn/
+      status: 200
+    - url: https://find.lib.tju.edu.cn/
+      status: 200
+    - url: https://news.tju.edu.cn/
+      status: 200
+    - url: https://oaa.tju.edu.cn/
+      status: 200
+    - url: https://gs.tju.edu.cn/
+      status: 200
+    - url: https://cic.tju.edu.cn/
+      status: 200
+    - url: https://github.com/TJUBlockchainLab
+      status: 200
+    - url: https://cn.linkedin.com/school/tianjinuniversity/
+      status: 999
+    - url: https://api.datacite.org/providers?query=Tianjin
+      status: 200
+    - url: https://api.datacite.org/clients?query=Tianjin
+      status: 200
+    - url: https://opac.lib.tju.edu.cn/
+      status: 200
+    - url: https://ir.lib.tju.edu.cn/
+      status: 200
+    - url: https://portal.tju.edu.cn/
+      status: 200
+    - url: https://ir.lib.tju.edu.cn/oai?verb=Identify
+      status: 200
+    - url: https://home.lib.tju.edu.cn/oai?verb=Identify
+      status: 404
+    - url: https://www.tju.edu.cn/oai?verb=Identify
+      status: 404
+    - url: https://idp.tju.edu.cn/.well-known/openid-configuration
+      status: 404
+    - url: https://idp.tju.edu.cn/idp/profile/oidc/keyset
+      status: 404
+    - url: https://www.tju.edu.cn/.well-known/openid-configuration
+      status: 404
+    - url: https://www.tju.edu.cn/.well-known/security.txt
+      status: 404
+    - url: https://www.tju.edu.cn/llms.txt
+      status: 404
+    - url: https://www.tju.edu.cn/robots.txt
+      status: 404
+    - url: https://en.tju.edu.cn/sitemap.xml
+      status: 404
+    - url: https://gs.tju.edu.cn/info/1023/4816.htm
+      status: 404
+    - url: https://api.tju.edu.cn/
+      status: 0
+    - url: https://data.tju.edu.cn/
+      status: 0
+    - url: https://developer.tju.edu.cn/
+      status: 0
+    - url: https://open.tju.edu.cn/
+      status: 0
+    - url: https://hpc.tju.edu.cn/
+      status: 0
