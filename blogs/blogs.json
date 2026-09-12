@@ -2,14 +2,20 @@
   "repo": "tianjin",
   "feeds": [
     {
+      "source": "https://find.lib.tju.edu.cn/",
+      "feed_url": "https://find.lib.tju.edu.cn/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://en.tju.edu.cn/News/Latest_News.htm",
       "feed_url": "https://en.tju.edu.cn/News/Latest_News.htm",
-      "title": "Tianjin University - Latest News",
+      "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-30T22:05:13Z"
+  "fetched": "2026-09-06T19:17:18Z"
 }
