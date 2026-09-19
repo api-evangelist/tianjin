@@ -67,7 +67,7 @@ tags:
   - Identity Federation
   - Shibboleth
   - SAML
-  - Single Sign-On
+  - SSO
   - Library
   - Research Repository
   - Persistent Identifiers
@@ -109,6 +109,13 @@ apis:
     humanURL: https://idp.tju.edu.cn/idp/
     baseURL: https://idp.tju.edu.cn/idp/
     tags:
+      - Identity Federation
+      - Shibboleth
+      - SAML
+      - SSO
+      - Authentication
+      - Education
+    tags_raw:
       - Identity Federation
       - Shibboleth
       - SAML
