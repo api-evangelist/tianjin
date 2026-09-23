@@ -1,0 +1,66 @@
+specification: API Evangelist Authentication Profile
+specificationVersion: '0.1'
+provider: Tianjin University
+providerId: tianjin
+generated: '2026-09-01'
+method: probed
+source: >-
+  https://idp.tju.edu.cn/idp/shibboleth (HTTP 200, archived under identity-federation/);
+  https://idp.tju.edu.cn/idp/profile/SAML2/Redirect/SSO (HTTP 400, branded Shibboleth error page);
+  https://idp.tju.edu.cn/idp/status (HTTP 403); negative probes of
+  https://idp.tju.edu.cn/.well-known/openid-configuration and
+  https://idp.tju.edu.cn/idp/profile/oidc/keyset (both HTTP 404); and the CARSI entity record in
+  the eduGAIN technical entity list.
+description: >-
+  Tianjin University publishes no public API, so there is no API key, token, OAuth client or
+  self-service registration to describe. What it does operate is institutional authentication:
+  a Shibboleth SAML 2.0 identity provider used for federated access to licensed resources through
+  CARSI, and a campus-network access control that fronts most internal systems.
+
+api_authentication:
+  public_api: false
+  schemes: []
+  registration: none
+  detail: >-
+    No developer portal, no API key issuance, no OAuth or OIDC authorization server offered to
+    third parties, and no documented API authentication of any kind on any tju.edu.cn host.
+
+institutional_authentication:
+- name: Tianjin University Shibboleth IdP (CARSI)
+  protocol: SAML 2.0 (Shibboleth)
+  entity_id: https://idp.tju.edu.cn/idp/shibboleth
+  metadata: identity-federation/tianjin-idp-saml-metadata.xml
+  federation: CARSI / eduGAIN
+  x-operator: institution
+  audience: >-
+    University members authenticating to CARSI-federated service providers — chiefly licensed
+    library and publisher resources. Not a third-party developer surface: relying parties join by
+    federation registration, not by signing up.
+  bindings:
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+  - urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+  - urn:mace:shibboleth:1.0:profiles:AuthnRequest
+  oidc: absent
+  oidc_evidence:
+  - url: https://idp.tju.edu.cn/.well-known/openid-configuration
+    status: 404
+  - url: https://idp.tju.edu.cn/idp/profile/oidc/keyset
+    status: 404
+
+network_access_control:
+  name: TJU campus-network gate
+  host: network-notice.tju.edu.cn
+  behaviour: >-
+    Off-campus requests to several university systems are transparently redirected to
+    http://network-notice.tju.edu.cn/, which serves a page titled "403" with HTTP status 200 — a
+    soft-403. It is an access control, not an outage, and the hosts behind it are graded live.
+  x-operator: institution
+  observed_on:
+  - host: opac.lib.tju.edu.cn
+    a_record: 202.113.2.196
+  - host: ir.lib.tju.edu.cn
+    a_record: 202.113.2.196
+  - host: portal.tju.edu.cn
+    a_record: 202.113.2.198

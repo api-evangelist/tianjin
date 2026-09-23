@@ -1,0 +1,136 @@
+specification: API Evangelist Identity Federation Record
+specificationVersion: '0.1'
+provider: Tianjin University
+providerId: tianjin
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live fetch of https://idp.tju.edu.cn/idp/shibboleth (HTTP 200, application/xml, 14,410 bytes,
+  archived verbatim as identity-federation/tianjin-idp-saml-metadata.xml); the branded login and
+  error surfaces at https://idp.tju.edu.cn/idp/profile/SAML2/Redirect/SSO (HTTP 400 "天津大学CARSI
+  Idp - Stale Request") and https://idp.tju.edu.cn/idp/status (HTTP 403 "天津大学CARSI Idp - Access
+  Denied"); the eduGAIN technical entity list for the CARSI federation
+  (https://technical.edugain.org/api.php?action=list_entities&format=json&fed_id=CARSI, HTTP 200,
+  602,799 bytes, 725 unique entities); the eduGAIN federation registry
+  (https://technical.edugain.org/api.php?action=list_feds, 92 federations); and DNS/whois
+  resolution of idp.tju.edu.cn.
+description: >-
+  Tianjin University operates its own Shibboleth SAML 2.0 identity provider and registers it in
+  CARSI, China's national research-and-education identity federation, which has been an eduGAIN
+  member since 2019. This is the institution's single strongest machine-readable, institution-
+  operated surface: a signed, credential-free metadata document describing endpoints the
+  university itself runs, on hardware in its own CERNET allocation, with no vendor host, CNAME or
+  contact anywhere in the chain.
+
+entity:
+  entity_id: https://idp.tju.edu.cn/idp/shibboleth
+  metadata_url: https://idp.tju.edu.cn/idp/shibboleth
+  metadata_status: 200
+  archived: identity-federation/tianjin-idp-saml-metadata.xml
+  software: Shibboleth Identity Provider
+  scope: idp.tju.edu.cn
+  scope_regexp: false
+  display_name_en: Tianjin University
+  display_name_zh: 天津大学(Tianjin University)
+  roles:
+  - IDPSSODescriptor
+  - AttributeAuthorityDescriptor
+  protocols:
+  - urn:oasis:names:tc:SAML:2.0:protocol
+  - urn:oasis:names:tc:SAML:1.1:protocol
+  - urn:mace:shibboleth:1.0
+  x509_certificates: 12
+  endpoints:
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+    service: SingleSignOnService
+    location: https://idp.tju.edu.cn/idp/profile/SAML2/Redirect/SSO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+    service: SingleSignOnService
+    location: https://idp.tju.edu.cn/idp/profile/SAML2/POST/SSO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+    service: SingleSignOnService
+    location: https://idp.tju.edu.cn/idp/profile/SAML2/POST-SimpleSign/SSO
+  - binding: urn:mace:shibboleth:1.0:profiles:AuthnRequest
+    service: SingleSignOnService
+    location: https://idp.tju.edu.cn/idp/profile/Shibboleth/SSO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+    service: SingleLogoutService
+    location: https://idp.tju.edu.cn/idp/profile/SAML2/Redirect/SLO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+    service: SingleLogoutService
+    location: https://idp.tju.edu.cn/idp/profile/SAML2/POST/SLO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+    service: SingleLogoutService
+    location: https://idp.tju.edu.cn:8443/idp/profile/SAML2/SOAP/SLO
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+    service: AttributeService
+    location: https://idp.tju.edu.cn:8443/idp/profile/SAML2/SOAP/AttributeQuery
+  - binding: urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding
+    service: AttributeService
+    location: https://idp.tju.edu.cn:8443/idp/profile/SAML1/SOAP/AttributeQuery
+  - binding: urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+    service: ArtifactResolutionService
+    location: https://idp.tju.edu.cn:8443/idp/profile/SAML2/SOAP/ArtifactResolution
+  - binding: urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding
+    service: ArtifactResolutionService
+    location: https://idp.tju.edu.cn:8443/idp/profile/SAML1/SOAP/ArtifactResolution
+
+federation:
+  name: CARSI
+  long_name: CERNET Authentication and Resource Sharing Infrastructure
+  registration_authority: https://www.carsi.edu.cn
+  operator_contact: carsi@pku.edu.cn
+  edugain_member_since: '2019-05-24'
+  edugain_production_since: '2019-06-18'
+  entities_in_federation: 725
+  entry:
+    edugain_entity_id: '671640'
+    first_seen: '2019-10-31 07:38:16'
+    code: CARSI
+    scopes: idp.tju.edu.cn
+    eccs_status: '3'
+    sirtfi_status: '0'
+    coco_status: null
+  disambiguation: >-
+    CARSI carries three separately registered Tianjin identity providers and they are different
+    institutions. idp.tju.edu.cn is Tianjin University; idp.tjufe.edu.cn is Tianjin University of
+    Finance and Economics (registered 2020-02-21); idp.tjut.edu.cn is Tianjin University of
+    Technology (registered 2020-05-08). Only the first is recorded in this repository.
+
+hosting:
+  host: idp.tju.edu.cn
+  a_record: 202.113.2.198
+  cname: none
+  same_address_as:
+  - www.tju.edu.cn
+  - en.tju.edu.cn
+  - portal.tju.edu.cn
+  netname: BJR-CERNET
+  network_operator: China Education and Research Network (CERNET)
+  country: CN
+
+x-operator: institution
+x-operator-basis: >-
+  The metadata endpoint, the SSO and SLO endpoints, the attribute authority and the signing
+  certificates are all on idp.tju.edu.cn, which resolves to 202.113.2.198 — the same address as
+  the university's own www and en sites, inside CERNET's BJR-CERNET allocation — with no CNAME to
+  any vendor. The Shibboleth software is open source and not a hosted platform, so there is no
+  vendor tenancy to record: the IdP is Tianjin University's own deployment on its own
+  infrastructure. The CARSI/eduGAIN registration of that IdP is recorded separately with
+  x-operator federation, because a federation is shared by definition while the identity behind
+  it is the institution's.
+
+caveats:
+- >-
+  The served metadata still carries the Shibboleth installer's own "This is example metadata
+  only" banner and an unedited mdui:DisplayName reading "A Name for the IdP at idp.tju.edu.cn".
+  That is a deployment-hygiene observation, not a reason to doubt the entity: the entityID,
+  shibmd:Scope, endpoints and certificates are live, and the federation's own record carries the
+  correct English and Chinese display names.
+- >-
+  No OpenID Connect surface exists alongside the SAML one. /idp/profile/oidc/keyset and
+  /.well-known/openid-configuration both return 404 on idp.tju.edu.cn, and
+  /.well-known/openid-configuration returns 404 on www.tju.edu.cn.
+- >-
+  /idp/status returns HTTP 403 by design — Shibboleth restricts that endpoint to configured
+  hosts. It is recorded as a live, deliberately access-controlled endpoint, not as a dead one.
