@@ -1,4 +1,4 @@
-# Tianjin University (tianjin)
+# Tianjin University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,58 +64,114 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Tianjin University (TJU) is a national public research university in Tianjin, China, founded in 1895 as Peiyang University and considered the oldest modern university in the country. It is ranked #269 in the QS World University Rankings 2025. This repository catalogs the institution's public developer and API footprint as an [APIs.json](http://apisjson.org) provider profile for the api-evangelist organization.
+Tianjin University (天津大学, TJU) is a national public research university in Tianjin, China, founded in 1895 as Peiyang University and recognised as the oldest modern university in the country. It publishes no public API, no developer portal, no open data portal and no specification of any kind: www.tju.edu.cn returns 404 for robots.txt, llms.txt, .well-known/security.txt and .well-known/openid-configuration, and api., data., open., developer. and dev.tju.edu.cn do not resolve. What it does operate — and this is the finding that separates it from most of this cohort — is its own Shibboleth SAML 2.0 identity provider at idp.tju.edu.cn, on the university's own CERNET address with no vendor CNAME, registered as entity 671640 in CARSI, China's national research-and-education identity federation, and visible in eduGAIN since October 2019. Its metadata document is credential-free, machine-readable and genuinely the institution's own engineering rather than a vendor's contract running under the university's name. Beyond that the estate is a set of relationships and gated systems: a Crossref membership with its own DOI prefix but only eleven registered DOIs, a ROR registration, a library discovery front end that answers only an SPA shell, and an institutional repository, OPAC and campus portal that resolve into TJU's own address block but redirect every off-campus request to a soft-403 network notice. There is no DataCite membership and no reachable OAI-PMH endpoint.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/tianjin/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=tianjin-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Research · China · Tianjin · Double First-Class · Project 985 · Identity Federation · Shibboleth · SAML · SSO
 
-## Type
+## Tianjin University on APIs.io
 
-- Index
-- Consumer
-- 3rd-Party
+Everything profiled for Tianjin University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tianjin/](https://apis.io/providers/tianjin/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-Education, Higher Education, University, Research, China, Tianjin
+- [Tianjin University Shibboleth Identity Provider (SAML 2.0 metadata)](https://apis.io/apis/tianjin/shibboleth-idp/) — The university's own Shibboleth identity provider, and the only credential-free, machine-readable contract anywhere in this profile.…
+- [CARSI / eduGAIN Federation Registration (entity 671640)](https://apis.io/apis/tianjin/carsi-edugain/) — The same identity provider seen from the federation side. Tianjin University's IdP is registered in CARSI — the CERNET Authentication and Resource Sharing…
+- [Crossref Membership (member 34483, prefix 10.55582)](https://apis.io/apis/tianjin/crossref/) — Tianjin University is a Crossref member in its own right — member id 34483, DOI prefix 10.55582 — and is also present in the Crossref Open Funder Registry…
+- [ROR Registration (https://ror.org/012tb2g32)](https://apis.io/apis/tianjin/ror/) — Tianjin University's Research Organization Registry record — the canonical machine-readable identifier for the institution as an entity, and the join key…
+- [TJU Library Unified Discovery (统一检索)](https://apis.io/apis/tianjin/library-discovery/) — The library's unified discovery front end at find.lib.tju.edu.cn, reachable from outside the campus network and serving a real single-page application…
+- [Campus-Network-Gated Systems (repository, OPAC, portal)](https://apis.io/apis/tianjin/campus-gated-systems/) — Three university systems resolve into TJU's own address block but are unreachable from outside the campus network: the institutional repository…
 
-## APIs
+### Published properties
 
-No public, documented API was confirmed for Tianjin University at the time of cataloging. The following public web property is recorded:
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Tianjin University Library OPAC** — public web catalog; no documented discovery API verified. Docs: https://opac.lib.tju.edu.cn
+#### JSON-LD (1)
 
-## Plans
+Linked-data contexts for the provider's vocabulary.
 
-- [plans/tianjin-plans-pricing.yml](plans/tianjin-plans-pricing.yml)
+- [Tianjin Context](https://apis.io/jsonld/tianjin/tianjin-context/)
 
-## Rate Limits
+#### Security (2)
 
-- [rate-limits/tianjin-rate-limits.yml](rate-limits/tianjin-rate-limits.yml)
+Authentication, trust centre, and vulnerability disclosure.
 
-## FinOps
+- [Tianjin Authentication](https://apis.io/security/tianjin/tianjin-authentication/)
+- [Tianjin Domain Security](https://apis.io/security/tianjin/tianjin-domain-security/)
 
-- [finops/tianjin-finops.yml](finops/tianjin-finops.yml)
+#### Plans and pricing (1)
 
-## Timestamps
+Published plans, tiers and prices.
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+- [Tianjin Plans Pricing](https://apis.io/plans/tianjin/tianjin-plans-pricing/)
 
-## Common Properties
+#### Rate limits (1)
 
-- Website: https://en.tju.edu.cn/
-- GitHub: https://github.com/TJUBlockchainLab
-- LinkedIn: https://cn.linkedin.com/school/tianjinuniversity/
-- Review: [review.yml](review.yml)
+Published request limits.
 
-## Notes
+- [Tianjin Rate Limits](https://apis.io/rate-limits/tianjin/tianjin-rate-limits/)
 
-- All entries reflect only public web properties that could be verified live. No API endpoints, base URLs, or sign-up flows were fabricated.
-- No public developer portal, open-data portal, or documented REST/OAI-PMH/SRU API was found.
-- The GitHub link points to the Tianjin University Blockchain Lab research organization, not an official institutional API program.
-- The LinkedIn page returns HTTP 999 to automated requests (standard LinkedIn anti-bot behavior); the page exists.
+#### FinOps (1)
 
-## Maintainers
+What the API costs to run, by operation.
 
-- Kin Lane — kin@apievangelist.com
+- [Tianjin Finops](https://apis.io/finops/tianjin/tianjin-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://en.tju.edu.cn/)
+- [Blog](https://news.tju.edu.cn/)
+
+## API Evangelist rating
+
+**Kin Score 15.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 17.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 5.3 |
+
+**Agent readiness 3.1** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tianjin/](https://apis.io/providers/tianjin/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tianjin University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tianjin/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
